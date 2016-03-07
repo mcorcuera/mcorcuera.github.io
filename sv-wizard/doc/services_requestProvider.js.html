@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: services/requestProvider.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: services/requestProvider.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>var svWizard = svWizard || {};
+
+svWizard.services = svWizard.services || svWizard;
+
+svWizard.services.RequestProvider = (function(){
+  
+  /**
+   * RequestProvider handles the creation, retrieval, update and deletion of
+   * requests into the browser's local storage.
+   * * &lt;br/>&lt;br/>
+   * It is included in the angular app module as &lt;b>RequestProvider&lt;/b> service
+   * and needs no configuration
+   * @constructor
+   * @param {localStorageService} localStorageService &lt;b>Injected&lt;/b>
+   * @memberOf svWizard.services
+   */
+  var RequestProvider = function(localStorageService) {
+    var REQUESTS = 'requests';
+
+    var requests_ = {};
+    var requestsArray_ = []
+    // Gets the requests from local storage
+    init_();
+    
+    /**
+     * The list of saved requests. It gets updated upong any change.
+     * @readonly
+     * @member {Array.&lt;svWizard.models.Request>} requests
+     * @memberOf svWizard.services.RequestProvider.prototype
+     */
+    Object.defineProperty(this, 'requests', {
+      get: function(){return requestsArray_}
+    });
+
+    /**
+     * It saves a new request into the requests collection and stores it in
+     * local storage. It will also update the requests array. Note that the
+     * request must have a name and it must be unique.
+     * @method
+     * @param {svWizard.models.Request} request the request to save
+     * @returns {svWizard.models.Request} the created request
+     */
+    this.createRequest = function(request) {
+      if(request.name === undefined || request.name === null || 
+        request.name.length === 0) {
+        throw 'Request must have a name';
+      }
+      
+      if(this.getRequestWithName(request.name) !== null) {
+        throw 'Name should be unique';
+      }
+      var id = Math.random().toString(36).substr(2, 9)
+      request.id = id;
+      request.timestamp = Date.now() + '';
+      requests_[id] = request;
+      saveRequests_();
+      updateArray_();
+      return request;
+    };
+    
+    /**
+     * It updates an already existing request in the requests collection and 
+     * stores it in local storage. It will also update the requests array.
+     * Note that the request must have been saved before and, in case it has a 
+     * new name, it must be unique.
+     * @method
+     * @param {svWizard.models.Request} request the request to save
+     * @returns {svWizard.models.Request} the updated request
+     */
+    this.updateRequest = function(id, newReq) {
+      if(newReq.name === undefined || newReq.name === null || 
+        newReq.name.length === 0) {
+        throw 'Request must have a name';
+      }
+      var oldReq = requests_[id];
+      
+      if(oldReq === undefined || oldReq === null) {
+        throw 'Request does not exist';
+      }
+      newReq.id = id;
+      newReq.timestamp = Date.now() + '';
+      requests_[id] = newReq;
+      saveRequests_();
+      updateArray_();
+      return newReq;
+    };
+    
+    /**
+     * Returns the request with the name provided if it exists in the requests
+     * collection. It will return &lt;tt>null&lt;/tt> otherwise.
+     * @method
+     * @params {string} name the name of the request to search
+     * @return {svWizard.models.Request}
+     */
+    this.getRequestWithName = function(name) {
+      var request = null;
+      if(name !== null &amp;&amp; name !== undefined &amp;&amp; name != '') {
+        for(var id in requests_) {
+          if(requests_.hasOwnProperty(id)) {
+            if(requests_[id].name === name) {
+              request = requests_[id];
+              break;
+            }
+          }
+        }  
+      }
+      return request;
+    }
+    
+    /**
+     * Deletes the request with the given id and updates the collection in local
+     * storage.
+     * @method
+     * @param {string} id
+     */
+    this.deleteRequest = function(id) {
+      delete requests_[id];
+      saveRequests_();
+      updateArray_();
+    }
+    
+    //Private
+    
+    /*Loads the requests from locastorage*/
+    function init_() {
+      var rawRequests = localStorageService.get(REQUESTS);
+      if(angular.isDefined(rawRequests) &amp;&amp; rawRequests !== null
+        &amp;&amp; rawRequests.length > 0) {
+        requests_ = angular.fromJson(rawRequests);
+      }else{
+        requests_ = {};
+      }
+      updateArray_();
+    }
+    /* Pushes the collection items into an array instead of into an object so it
+    is easier to use in a view */
+    function updateArray_() {
+      requestsArray_ = [];
+      for(var key in requests_) {
+        requestsArray_.push(requests_[key]);
+      }
+    }
+    /* Saves the requests collection into local storage */
+    function saveRequests_() {
+      var requestsJson = angular.toJson(requests_);
+      localStorageService.set(REQUESTS, requestsJson);
+    } 
+  }
+  return RequestProvider;
+})();
+
+angular.module('svWizardApp').service('RequestProvider', ['localStorageService',
+  svWizard.services.RequestProvider
+]);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="svWizard.controllers.ConfirmCtrl.html">ConfirmCtrl</a></li><li><a href="svWizard.controllers.GeneratedUrlCtrl.html">GeneratedUrlCtrl</a></li><li><a href="svWizard.controllers.MainCtrl.html">MainCtrl</a></li><li><a href="svWizard.controllers.MenuCtrl.html">MenuCtrl</a></li><li><a href="svWizard.controllers.SaveCtrl.html">SaveCtrl</a></li><li><a href="svWizard.services.Menu.html">Menu</a></li><li><a href="svWizard.services.Menu.Provider.html">Provider</a></li><li><a href="svWizard.services.RequestProvider.html">RequestProvider</a></li><li><a href="svWizard.services.Settings.html">Settings</a></li><li><a href="svWizard.services.State.html">State</a></li></ul><h3>Namespaces</h3><ul><li><a href="svWizard.html">svWizard</a></li><li><a href="svWizard.controllers.html">controllers</a></li><li><a href="svWizard.directives.html">directives</a></li><li><a href="svWizard.models.html">models</a></li><li><a href="svWizard.services.html">services</a></li><li><a href="svWizard.services.utils.html">utils</a></li><li><a href="svWizard.services.utils.generator.html">generator</a></li><li><a href="svWizard.services.utils.numbers.html">numbers</a></li><li><a href="svWizard.services.utils.signing.html">signing</a></li><li><a href="svWizard.services.utils.ui.html">ui</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon Mar 07 2016 14:34:36 GMT+0000 (UTC)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

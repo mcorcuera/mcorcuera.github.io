@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: RequestProvider</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Class: RequestProvider</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+            <span class="ancestors"><a href="svWizard.html">svWizard</a><a href="svWizard.services.html">.services</a>.</span>RequestProvider</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+
+    <h4 class="name" id="RequestProvider"><span class="type-signature"></span>new RequestProvider<span class="signature">(localStorageService)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    RequestProvider handles the creation, retrieval, update and deletion of
+requests into the browser's local storage.
+* <br/><br/>
+It is included in the angular app module as <b>RequestProvider</b> service
+and needs no configuration
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>localStorageService</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">localStorageService</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><b>Injected</b></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_requestProvider.js.html">services/requestProvider.js</a>, <a href="services_requestProvider.js.html#line17">line 17</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="requests"><span class="type-signature">(readonly) </span>requests<span class="type-signature"> :Array.&lt;<a href="svWizard.models.html#.Request">svWizard.models.Request</a>></span></h4>
+
+
+
+
+<div class="description">
+    The list of saved requests. It gets updated upong any change.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array.&lt;<a href="svWizard.models.html#.Request">svWizard.models.Request</a>></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_requestProvider.js.html">services/requestProvider.js</a>, <a href="services_requestProvider.js.html#line25">line 25</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="createRequest"><span class="type-signature"></span>createRequest<span class="signature">(request)</span><span class="type-signature"> &rarr; {<a href="svWizard.models.html#.Request">svWizard.models.Request</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    It saves a new request into the requests collection and stores it in
+local storage. It will also update the requests array. Note that the
+request must have a name and it must be unique.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>request</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="svWizard.models.html#.Request">svWizard.models.Request</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the request to save</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_requestProvider.js.html">services/requestProvider.js</a>, <a href="services_requestProvider.js.html#line43">line 43</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    the created request
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="svWizard.models.html#.Request">svWizard.models.Request</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="deleteRequest"><span class="type-signature"></span>deleteRequest<span class="signature">(id)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Deletes the request with the given id and updates the collection in local
+storage.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_requestProvider.js.html">services/requestProvider.js</a>, <a href="services_requestProvider.js.html#line116">line 116</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getRequestWithName"><span class="type-signature"></span>getRequestWithName<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="svWizard.models.html#.Request">svWizard.models.Request</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Returns the request with the name provided if it exists in the requests
+collection. It will return <tt>null</tt> otherwise.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_requestProvider.js.html">services/requestProvider.js</a>, <a href="services_requestProvider.js.html#line95">line 95</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="svWizard.models.html#.Request">svWizard.models.Request</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="updateRequest"><span class="type-signature"></span>updateRequest<span class="signature">(request)</span><span class="type-signature"> &rarr; {<a href="svWizard.models.html#.Request">svWizard.models.Request</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    It updates an already existing request in the requests collection and 
+stores it in local storage. It will also update the requests array.
+Note that the request must have been saved before and, in case it has a 
+new name, it must be unique.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>request</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="svWizard.models.html#.Request">svWizard.models.Request</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the request to save</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_requestProvider.js.html">services/requestProvider.js</a>, <a href="services_requestProvider.js.html#line70">line 70</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    the updated request
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="svWizard.models.html#.Request">svWizard.models.Request</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="svWizard.controllers.ConfirmCtrl.html">ConfirmCtrl</a></li><li><a href="svWizard.controllers.GeneratedUrlCtrl.html">GeneratedUrlCtrl</a></li><li><a href="svWizard.controllers.MainCtrl.html">MainCtrl</a></li><li><a href="svWizard.controllers.MenuCtrl.html">MenuCtrl</a></li><li><a href="svWizard.controllers.SaveCtrl.html">SaveCtrl</a></li><li><a href="svWizard.services.Menu.html">Menu</a></li><li><a href="svWizard.services.Menu.Provider.html">Provider</a></li><li><a href="svWizard.services.RequestProvider.html">RequestProvider</a></li><li><a href="svWizard.services.Settings.html">Settings</a></li><li><a href="svWizard.services.State.html">State</a></li></ul><h3>Namespaces</h3><ul><li><a href="svWizard.html">svWizard</a></li><li><a href="svWizard.controllers.html">controllers</a></li><li><a href="svWizard.directives.html">directives</a></li><li><a href="svWizard.models.html">models</a></li><li><a href="svWizard.services.html">services</a></li><li><a href="svWizard.services.utils.html">utils</a></li><li><a href="svWizard.services.utils.generator.html">generator</a></li><li><a href="svWizard.services.utils.numbers.html">numbers</a></li><li><a href="svWizard.services.utils.signing.html">signing</a></li><li><a href="svWizard.services.utils.ui.html">ui</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon Mar 07 2016 14:34:36 GMT+0000 (UTC)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

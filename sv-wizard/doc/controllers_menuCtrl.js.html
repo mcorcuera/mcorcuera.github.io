@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: controllers/menuCtrl.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: controllers/menuCtrl.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>var svWizard = svWizard || {};
+svWizard.controllers = svWizard.controllers || {};
+
+svWizard.controllers.MenuCtrl = (function(){
+  /**
+   * MenuCtrl controls the side menu on the application. There are two sections
+   * in the menu:
+   * &lt;br/>
+   * &lt;ul>
+   *  &lt;li>&lt;b>Settings&lt;/b>: the user can configure the authentication 
+   *    credentials. These are obtained from the &lt;tt>Settings&lt;/tt> service
+   *  &lt;/li>
+   *  &lt;li>&lt;b>Saved requests&lt;/b>: the user can see the list of saved requests,
+   *    open and delete them, and filter them by name using the search input.
+   *    The operations on the saved requests are done using the 
+   *    &lt;tt>RequestProvider&lt;/tt> service
+   *  &lt;/li>
+   * &lt;/ul>
+   * @constructor
+   * @param {svWizard.services.Settings} settings &lt;b>Injected&lt;/b>
+   * @param {svWizard.services.RequestProvider} requestProvier &lt;b>Injected&lt;/b>
+   * @param {svWizard.services.State} State &lt;b>Injected&lt;/b>
+   * @param {svWizard.services.Menu} Menu &lt;b>Injected&lt;/b>
+   * @memberOf svWizard.controllers
+   */
+  var MenuCtrl = function(settings, requestProvider, 
+    state, menu) {
+    
+    /**
+     * @type {svWizard.services.RequestProvider}
+     */
+    this.provider = requestProvider;
+    /**
+     * @type {svWizard.services.Settings}
+     */
+    this.settings = settings;
+    /**
+     * @type {svWizard.services.State}
+     */
+    this.state = state;
+    
+    /**
+     * @type {svWizard.services.Menu}
+     */
+    this.menu = menu;    
+    
+    /**
+     * String to filter the saved URLs with
+     * @type {string}
+     */
+    this.search = '';
+    
+    /**
+     * List of messages needed in the view
+     * @type {Object}
+     */
+    this.messages = {
+      /**
+       * Message to display in the delete-request confirmation dialog
+       * @type {string}
+       * @default
+       */
+      confirmDelete: 'Do you really want to delete this request? Note that ' +
+        'this action cannot be undone'
+    }
+  };
+  
+  /**
+   * Opens a saved request so it is displayed on the main view of the 
+   * application. It does it by just copying the saved request into the current
+   * request.
+   * @method
+   * @param {svWizard.models.Request} request the request to open
+   */
+  MenuCtrl.prototype.openRequest = function(request) {
+    this.state.current = angular.copy(request);
+    this.menu.close();
+  };
+  
+  /**
+   * Deletes a saved request from localstorage and, in case it is the current
+   * request, it makes it new by removing its id and name. This is only called
+   * after user's confirmation.
+   * @method
+   * @param {svWizard.models.Request} request the request to open
+   */
+  MenuCtrl.prototype.deleteRequest = function(request){
+    this.provider.deleteRequest(request.id);
+    if(this.state.current.id === request.id) {
+      this.state.current.id = null;
+      this.state.current.name = '';
+    }
+  }
+  return MenuCtrl;
+})();
+
+
+angular.module('svWizardApp').controller( 'MenuCtrl', ['Settings',
+'RequestProvider', 'State', 'Menu', svWizard.controllers.MenuCtrl]);
+  </code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="svWizard.controllers.ConfirmCtrl.html">ConfirmCtrl</a></li><li><a href="svWizard.controllers.GeneratedUrlCtrl.html">GeneratedUrlCtrl</a></li><li><a href="svWizard.controllers.MainCtrl.html">MainCtrl</a></li><li><a href="svWizard.controllers.MenuCtrl.html">MenuCtrl</a></li><li><a href="svWizard.controllers.SaveCtrl.html">SaveCtrl</a></li><li><a href="svWizard.services.Menu.html">Menu</a></li><li><a href="svWizard.services.Menu.Provider.html">Provider</a></li><li><a href="svWizard.services.RequestProvider.html">RequestProvider</a></li><li><a href="svWizard.services.Settings.html">Settings</a></li><li><a href="svWizard.services.State.html">State</a></li></ul><h3>Namespaces</h3><ul><li><a href="svWizard.html">svWizard</a></li><li><a href="svWizard.controllers.html">controllers</a></li><li><a href="svWizard.directives.html">directives</a></li><li><a href="svWizard.models.html">models</a></li><li><a href="svWizard.services.html">services</a></li><li><a href="svWizard.services.utils.html">utils</a></li><li><a href="svWizard.services.utils.generator.html">generator</a></li><li><a href="svWizard.services.utils.numbers.html">numbers</a></li><li><a href="svWizard.services.utils.signing.html">signing</a></li><li><a href="svWizard.services.utils.ui.html">ui</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon Mar 07 2016 14:34:36 GMT+0000 (UTC)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
